@@ -1,0 +1,17 @@
+apiVersion: serving.kserve.io/v1alpha1
+kind: ServingRuntime
+metadata:
+  name: sklearn-runtime
+  namespace: kserve-test
+spec:
+  supportedModelFormats:
+    - name: sklearn
+      version: "1"
+      autoSelect: true
+  containers:
+    - name: kserve-container
+      image: kserve/sklearnserver:v0.16.0
+      args:
+        - --model_dir=/mnt/models
+        - --model_name=sklearn-iris
+        - --http_port=8080

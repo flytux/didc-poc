@@ -1,21 +1,23 @@
-# Project Title
+# README
 
-## Section 1
-- Bullet point 1
-- Bullet point 2
+## 1. GPU 클러스터 구성
 
+- GPU Operator 설치
 ### GPU Operator 설치
-- Subsection bullet point 1
-- Subsection bullet point 2
 
-### Another Subsection
-- Subsection bullet point 1
-- Subsection bullet point 2
+1. Step 1 command
+2. Step 2 command
 
-## Section 2
-- Bullet point 3
-- Bullet point 4
+- Helm Chart 설치
+### Helm Chart 설치
 
-### Additional Section
-- Subsection bullet point 3
-- Subsection bullet point 4
+1. Step 1 command
+2. Step 2 command
+
+## 2. Application 배포
+
+- Application 배포 방법
+### Application 배포 방법
+
+1. Step 1 command
+2. Step 2 command

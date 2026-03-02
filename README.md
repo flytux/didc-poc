@@ -1,3 +1,25 @@
+#### Install Rancher
+
+# cert-manager 설치
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.10.0/cert-manager.yaml
+
+# Rancher helm 레파지토리 등록
+helm repo add rancher-latest https://releases.rancher.com/server-charts/latest 
+
+# Rancher 설치
+# 원하는 도메인 명 등록 후 해당 도메인 명으로 접속
+helm upgrade -i rancher rancher-latest/rancher \
+  --set hostname=rancher.local --set bootstrapPassword=admin \
+  --set replicas=1 --set global.cattle.psp.enabled=false \
+  --create-namespace -n cattle-system
+
+
+#### Install metallab
+
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.15.3/config/manifests/metallb-native.yaml 
+
+kubectl apply -f metallb-config.yaml
+
 #### Install nfs-driver
 
 curl -skSL https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/v4.5.0/deploy/install-driver.sh | bash -s v4.5.0 --
@@ -60,8 +82,10 @@ kubectl apply -f inference-service.yaml
 kubectl get inferenceservices sklearn-iris -n kserve-test
 
 #### Kserv Iris test
-curl -v -H "Host: sklearn-iris.kserve-test.didc.local" -H "Content-Type: application/json" \
-  http://127.0.0.1:30288/v1/models/sklearn-iris:predict -d @./iris-input.json
+kubectl get svc istio-ingressgateway -n istio-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 
 curl -v -H "Host: sklearn-iris.kserve-test.didc.local" -H "Content-Type: application/json" \
-  http://127.0.0.1:30288/v1/models/sklearn-iris:predict -d @./iris-input2.json
+  http://%LB_IP%/v1/models/sklearn-iris:predict -d @./iris-input.json
+
+curl -v -H "Host: sklearn-iris.kserve-test.didc.local" -H "Content-Type: application/json" \
+  http://%LB_IP%/v1/models/sklearn-iris:predict -d @./iris-input2.json

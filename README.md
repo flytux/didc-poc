@@ -97,7 +97,7 @@ kubectl apply -f inference-service.yaml
 kubectl get inferenceservices sklearn-iris -n kserve-test
 
 ## Inference Service 호출 (IRIS)
-LB_IP=(kubectl get svc istio-ingressgateway -n istio-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+LB_IP=$(kubectl get svc istio-ingressgateway -n istio-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 
 curl -v -H "Host: sklearn-iris.kserve-test.didc.local" -H "Content-Type: application/json" \
   http://$LB_IP/v1/models/sklearn-iris:predict -d @./iris-input.json

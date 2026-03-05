@@ -7,7 +7,7 @@
     },
     {
       "role": "user",
-      "content": "Is Trump the president of US mad?"
+      "content": "Is Donald Trump mad?"
     }
   ],
   "max_tokens": 150,

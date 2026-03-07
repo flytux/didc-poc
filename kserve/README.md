@@ -1,3 +1,24 @@
+### Install Kserve-LLM
+
+helm install kserve-llmisvc-crd oci://ghcr.io/kserve/charts/kserve-llmisvc-crd \
+  --version v0.16.0  \
+  --namespace kserve --create-namespace
+
+helm upgrade -i kserve-llmisvc oci://ghcr.io/kserve/charts/kserve-llmisvc-resources \
+  --version v0.16.0 \\n  --namespace kserve
+
+kubectl delete configmap inferenceservice-config -n kserve
+
+### Qwen
+kubectl create secret generic hf-secret \
+--from-literal=HF_TOKEN=$MY_TOKEN \
+-n kserve-test
+
+kubectl apply -f hf-storage.yaml
+
+kubectl apply -f qwen-llm.yaml
+
+### Code Rest
 rest.http
 
 ###

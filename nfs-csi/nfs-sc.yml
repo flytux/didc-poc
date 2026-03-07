@@ -4,7 +4,7 @@ metadata:
   name: nfs-csi
 provisioner: nfs.csi.k8s.io
 parameters:
-  server: 192.168.0.6
+  server: 192.168.0.236
   share: /mnt/pv
 reclaimPolicy: Retain 
 volumeBindingMode: Immediate

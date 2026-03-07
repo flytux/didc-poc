@@ -12,7 +12,7 @@ spec:
   addresses:
     # CIDR range of IPs available for LoadBalancer services
     # Replace with your actual free IP range on the local network
-    - 192.168.0.200-192.168.100.250
+    - 192.168.100.200-192.168.100.250
     # You can add additional ranges or single IPs as needed
     # - 10.0.0.100/32
 
